@@ -1,0 +1,30 @@
+{
+    "lcolehower": {
+        "salt": "3c3e1d950a4e267824be64e20520ee7d",
+        "hashed": "6c84fb3fed6b0f0bdd86add823fa6203fcec05db0bae89a7d8a128a3a630bf94"
+    },
+    "Alice": {
+        "salt": "098b0716030cd4b47c197c586138af5b",
+        "hashed": "009afe2847f304d42fc1a35edf7cfda125561596fcb51f4b7929de56ae4e6947"
+    },
+    "Bob": {
+        "salt": "18174fa0d2a538028cba51b7b04100ed",
+        "hashed": "4d47d49b9e29687fa7849273df97cb8bbe4093811de40b5b201f07411cc8d6e1"
+    },
+    "coleho43": {
+        "salt": "b430667878abb22f961aa99104a72712",
+        "hashed": "cc6d242c1ef08e3c6766a6958dc970e6eae35d20eb1fd26bc651f1bd28ef437a"
+    },
+    "John.Doe@rowan.edu": {
+        "salt": "2fe2d658fff320e99c465eea2598614c",
+        "hashed": "a765e2a6d89b1aed86220a4f155a7c85eb76753df552bd25c3e5fb7c147355de"
+    },
+    "john.doe": {
+        "salt": "734ad6bd1fed9b096c5d20e9f31a312c",
+        "hashed": "7378ae20aeb90ba604c81b07e13c6bd6db6f5329ead276d0b8c1efe1428f1cdc"
+    },
+    "dwhene": {
+        "salt": "6cda7fd9990b0d53c2c98d8328d1d554",
+        "hashed": "26b203d3dad9c05cbdfceee651607fe99e568450eea018054aea07019a05fe03"
+    }
+}
