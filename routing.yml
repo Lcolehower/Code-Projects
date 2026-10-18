@@ -1,0 +1,11 @@
+- name: Configure OSPF on Core
+  hosts: core
+  gather_facts: no
+
+  tasks:
+    - name: Configure OSPF
+      ios_config:
+        lines:
+          - "router ospf {{ ospf.process_id }}"
+          - "network {{ item.network }} {{ item.wildcard }} area {{ item.area }}"
+      loop: "{{ ospf.networks }}"

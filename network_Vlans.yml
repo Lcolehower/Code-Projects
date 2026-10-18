@@ -1,0 +1,30 @@
+---
+- name: Network Configuration Playbook
+  hosts: switches                # Refers to a group in your inventory file
+  connection: ansible.netcommon.network_cli  # Standard for network CLI
+  gather_facts: false            # Often set to false to speed up initial connection
+
+  tasks:
+    - name: Gather device facts
+      cisco.ios.ios_facts:       # Replace with your OS module (e.g., arista.eos.eos_facts)
+        gather_subset: all
+
+    - name: Configure Hostname
+      cisco.ios.ios_system:
+        hostname: "{{ inventory_hostname }}"
+
+    - name: Configure VLAN 100
+      cisco.ios.ios_vlans:
+        config:
+          - name: MGMT
+            vlan_id: 100
+        state: merged            # Merges this config with existing device config
+
+    - name: Configure VLAN 200
+      cisco.ios.ios_vlans:
+        config:
+          - name: DATA_VLAN
+            vlan_id: 200
+        state: merged 
+
+   

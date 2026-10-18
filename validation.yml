@@ -1,0 +1,15 @@
+- name: Verify VLANs
+  hosts: access
+  gather_facts: no
+
+  tasks:
+    - name: Show VLANs
+      ios_command:
+        commands:
+          - show vlan brief
+      register: vlan_output
+
+    - name: Check VLAN 10 exists
+      assert:
+        that:
+          - "'10' in vlan_output.stdout[0]"

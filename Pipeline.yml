@@ -1,0 +1,28 @@
+name: Network Config Pipeline
+
+on:
+  push:
+    paths:
+      - "network-configs/**"
+
+jobs:
+  validate-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Ansible
+        run: pip install ansible
+
+      - name: Lint YAML
+        run: |
+          pip install yamllint
+          yamllint .
+
+      - name: Run syntax check
+        run: ansible-playbook playbook.yml --syntax-check
+
+      - name: Deploy configs
+        run: ansible-playbook playbook.yml

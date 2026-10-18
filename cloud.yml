@@ -1,0 +1,18 @@
+vpc:
+  name: prod-vpc
+  cidr: 10.0.0.0/16
+
+subnets:
+  - name: public-subnet
+    cidr: 10.0.1.0/24
+    az: us-east-1a
+  - name: private-subnet
+    cidr: 10.0.2.0/24
+    az: us-east-1b
+
+security_groups:
+  - name: web-sg
+    rules:
+      - port: 80
+        protocol: tcp
+        cidr: 0.0.0.0/0

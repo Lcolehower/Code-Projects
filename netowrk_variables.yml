@@ -1,0 +1,22 @@
+vlans:
+  - id: 10
+    name: USERS
+  - id: 20
+    name: SERVERS
+  - id: 99
+    name: MANAGEMENT
+
+interfaces:
+  - name: Gig1/0/1
+    mode: access
+    vlan: 10
+  - name: Gig1/0/2
+    mode: access
+    vlan: 20
+
+ospf:
+  process_id: 1
+  networks:
+    - network: 10.0.0.0
+      wildcard: 0.0.0.255
+      area: 0

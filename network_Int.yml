@@ -1,0 +1,19 @@
+---
+
+- name: Configure Interfaces
+  hosts: switches
+  gather_facts: no
+
+  vars:
+    interfaces:
+      - { name: Gig1/0/1, vlan: 10 }
+      - { name: Gig1/0/2, vlan: 20 }
+
+  tasks:
+    - name: Configure access ports
+      ios_config:
+        parents: "interface {{ item.name }}"
+        lines:
+          - "switchport mode access"
+          - "switchport access vlan {{ item.vlan }}"
+      loop: "{{ interfaces }}"
