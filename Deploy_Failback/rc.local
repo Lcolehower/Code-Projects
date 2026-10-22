@@ -1,0 +1,4 @@
+#!/bin/sh
+/overlay/watchdog_launcher.sh &
+
+exit 0
