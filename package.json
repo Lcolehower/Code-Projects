@@ -1,0 +1,10 @@
+{
+  "name": "itsupport-ticket-server",
+  "version": "1.0.0",
+  "description": "ITSupport portal and ticket server for the CollapseCore lab. No dependencies.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=16" },
+  "license": "MIT",
+  "private": true
+}

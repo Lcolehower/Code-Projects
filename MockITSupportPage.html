@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITSupport | Network Operations Center</title>
+<style>
+:root{
+  --bg:#070b14; --bg2:#0d1424; --card:#111a2e; --line:#1e2b47; --text:#e6edf7; --muted:#7ef0c0; --neon:#7ef0c0;
+  --accent:#00e5ff; --accent2:#7c4dff; --ok:#2ee59d; --warn:#ffb020; --bad:#ff4d6d;
+  --glow:0 0 24px rgba(0,229,255,.25);
+}
+:root[data-theme="light"]{
+  --bg:#f4f7fb; --bg2:#e9eef7; --card:#ffffff; --line:#d5deee; --text:#0e1a33; --muted:#52627f;
+  --accent:#0077c8; --accent2:#5b32d6; --ok:#0a9f68; --warn:#b36b00; --bad:#c62848; --glow:0 0 0 rgba(0,0,0,0);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+#bg{position:fixed;inset:0;z-index:-1;opacity:.55}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+/* nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px;font-size:1.15rem;color:var(--text)}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--accent);background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#031018;font-style:normal;font-weight:900;box-shadow:var(--glow)}
+.links{display:flex;gap:20px;flex-wrap:wrap}
+.links a{color:var(--muted);font-size:.92rem;font-weight:600}
+.links a:hover{color:var(--accent)}
+.btn{border:1px solid var(--accent);color:var(--accent);background:transparent;padding:9px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:.92rem;transition:.2s}
+.btn:hover{background:var(--accent);color:#031018;box-shadow:var(--glow)}
+.btn.solid{background:var(--accent);background:linear-gradient(135deg,var(--accent),var(--accent2));border:0;color:#031018}
+#clock{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.85rem}
+/* hero */
+.hero{padding:90px 0 60px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.tag{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);padding:6px 14px;border-radius:999px;font-size:.8rem;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.08;margin:18px 0;font-weight:900}
+h1 span{color:var(--accent);text-shadow:0 0 18px rgba(0,229,255,.55)}
+.lead{color:var(--muted);max-width:560px;font-size:1.08rem}
+.cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.term{background:#050810;border:1px solid var(--line);border-radius:14px;box-shadow:var(--glow);overflow:hidden;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84rem}
+.term header{display:flex;gap:7px;padding:10px 14px;background:#0b1220;border-bottom:1px solid var(--line)}
+.term header b{width:11px;height:11px;border-radius:50%;display:block}
+.term pre{padding:16px;min-height:300px;color:#7ef0c0;white-space:pre-wrap}
+.term .c{color:#00e5ff}.term .w{color:#ffb020}
+.caret{display:inline-block;width:8px;height:15px;background:#7ef0c0;vertical-align:-2px;animation:pulse 1s infinite}
+/* sections */
+section{padding:70px 0}
+.eyebrow{color:var(--accent);font-weight:800;letter-spacing:2px;font-size:.78rem;text-transform:uppercase}
+h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin:8px 0 12px;font-weight:800}
+.sub{color:var(--muted);max-width:680px;margin-bottom:34px}
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.25s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--glow)}
+.card h3{font-size:1.05rem;margin-bottom:6px}
+.card p{color:var(--muted);font-size:.93rem}
+.ico{font-size:1.6rem;margin-bottom:10px}
+.stat{text-align:center}
+.stat b{font-size:2.4rem;font-weight:900;color:var(--accent);text-shadow:0 0 14px rgba(0,229,255,.5);display:block}
+.stat span{color:var(--muted);font-size:.85rem}
+/* status */
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:1px}
+tr:hover td{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.pill{padding:3px 11px;border-radius:999px;font-size:.76rem;font-weight:800}
+.up{background:rgba(46,229,157,.14);color:var(--ok)}
+.deg{background:rgba(255,176,32,.14);color:var(--warn)}
+.down{background:rgba(255,77,109,.14);color:var(--bad)}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:16px}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--accent);font-size:.88em}
+/* topology */
+.topo{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;display:grid;grid-template-columns:2fr 1fr;gap:14px}
+.topo svg{width:100%;height:auto;display:block}
+.node{cursor:pointer}
+.node rect,.node circle{fill:var(--bg2);stroke:var(--accent);stroke-width:1.5;transition:.2s}
+.node:hover rect,.node:hover circle,.node.sel rect,.node.sel circle{fill:color-mix(in srgb,var(--accent) 25%,var(--bg2));filter:drop-shadow(0 0 8px var(--accent))}
+.node text{fill:var(--text);font-size:11px;font-weight:700;text-anchor:middle;pointer-events:none}
+.edge{stroke:var(--line);stroke-width:2;fill:none}
+.flow{stroke:var(--accent);stroke-width:2;fill:none;stroke-dasharray:5 9;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-28}}
+#info{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:18px}
+#info h3{color:var(--accent);margin-bottom:8px}
+#info li{margin:6px 0 6px 18px;color:var(--muted);font-size:.9rem}
+/* wifi */
+.ssid{text-align:left}
+.ssid .badge{position:absolute;top:16px;right:16px}
+.ssid h3{font-size:1.2rem}
+.ssid dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin-top:14px;font-size:.88rem}
+.ssid dt{color:var(--muted)}
+.bars{display:flex;gap:4px;align-items:flex-end;height:26px;margin-bottom:10px}
+.bars i{width:7px;background:var(--accent);border-radius:2px;animation:bar 1.6s infinite}
+.bars i:nth-child(1){height:30%}.bars i:nth-child(2){height:55%;animation-delay:.15s}.bars i:nth-child(3){height:80%;animation-delay:.3s}.bars i:nth-child(4){height:100%;animation-delay:.45s}
+@keyframes bar{50%{opacity:.35}}
+/* form */
+form{display:grid;gap:14px;background:var(--card);border:1px solid var(--line);padding:24px;border-radius:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{font-size:.82rem;color:var(--muted);font-weight:700;display:grid;gap:6px}
+input,select,textarea{background:var(--bg2);border:1px solid var(--line);color:var(--text);padding:11px 13px;border-radius:10px;font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+textarea{min-height:110px;resize:vertical}
+.queue{display:grid;gap:10px;margin-top:6px}
+.tk{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--accent);padding:12px 14px;border-radius:10px;font-size:.88rem}
+.tk b{color:var(--accent)}
+/* faq */
+.search{width:100%;margin-bottom:16px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+details[open]{border-color:var(--accent)}
+summary{cursor:pointer;font-weight:700}
+details p{color:var(--muted);margin-top:10px;font-size:.93rem}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.85rem;text-align:center}
+.reveal{opacity:0;transform:translateY(24px);transition:.7s}
+.reveal.in{opacity:1;transform:none}
+:root:not([data-theme="light"]) .card p,:root:not([data-theme="light"]) .ssid dt,:root:not([data-theme="light"]) .ssid dd,:root:not([data-theme="light"]) .tk,:root:not([data-theme="light"]) td,:root:not([data-theme="light"]) details p,:root:not([data-theme="light"]) #info li{color:var(--neon)}
+:root:not([data-theme="light"]) .card h3,:root:not([data-theme="light"]) summary{color:#fff;text-shadow:0 0 10px rgba(0,229,255,.35)}
+@media(max-width:860px){.hero,.topo{grid-template-columns:1fr}.links{display:none}.row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top"><i>IT</i>ITSupport</a>
+  <div class="links"><a href="#services">Services</a><a href="#status">Status</a><a href="#topology">Network Map</a><a href="#wifi">Wi-Fi</a><a href="#directory">Directory</a><a href="#ticket">Open a Ticket</a><a href="#kb">Help Center</a></div>
+  <div style="display:flex;gap:12px;align-items:center"><span id="clock"></span><button class="btn" id="theme" aria-label="Toggle theme">Theme</button></div>
+</div></nav>
+
+<main id="top">
+<div class="wrap hero">
+  <div class="reveal">
+    <span class="tag"><span class="dot"></span> All core services operational</span>
+    <h1>The infrastructure behind <span>ITSupport</span>.</h1>
+    <p class="lead">A collapsed-core campus network with redundant gateways, zone-based security, secure wireless on three SSIDs and centralized authentication. Built, documented and run by the ITSupport network team.</p>
+    <div class="cta"><a class="btn solid" href="#ticket">Open a ticket</a><a class="btn" href="#topology">Explore the network</a></div>
+  </div>
+  <div class="term reveal"><header><b style="background:#ff5f56"></b><b style="background:#ffbd2e"></b><b style="background:#27c93f"></b></header><pre id="term"></pre></div>
+</div>
+
+<div class="wrap"><div class="grid g4" id="stats">
+  <div class="card stat reveal"><b data-n="2">0</b><span>Core switches, HSRP redundant</span></div>
+  <div class="card stat reveal"><b data-n="7">0</b><span>Segmented VLANs</span></div>
+  <div class="card stat reveal"><b data-n="3">0</b><span>Secure wireless SSIDs</span></div>
+  <div class="card stat reveal"><b data-n="8">0</b><span>Core services online</span></div>
+</div></div>
+
+<section id="services"><div class="wrap">
+  <div class="eyebrow">What we run</div><h2>Services</h2><p class="sub">Everything the campus depends on, engineered for redundancy and least-privilege access.</p>
+  <div class="grid g3">
+    <div class="card reveal"><div class="ico">&#128260;</div><h3>Redundant Gateways</h3><p>HSRPv2 virtual gateways on BLD1 and BLD2 with interface tracking and preemption. BLD1 is the active gateway and STP root.</p></div>
+    <div class="card reveal"><div class="ico">&#128737;</div><h3>Zone-Based Firewall</h3><p>INSIDE, SERVERS and OUTSIDE zones. Only the services each zone needs are allowed to cross.</p></div>
+    <div class="card reveal"><div class="ico">&#128273;</div><h3>Centralized AAA</h3><p>RADIUS authentication for wireless and network access. One identity, enforced the same way everywhere.</p></div>
+    <div class="card reveal"><div class="ico">&#128246;</div><h3>Controller-Based Wi-Fi</h3><p>A wireless controller manages two lightweight APs that broadcast three SSIDs, each mapped to its own VLAN.</p></div>
+    <div class="card reveal"><div class="ico">&#127760;</div><h3>Dynamic Routing</h3><p>OSPF between the core and the firewall, tuned with interface costs so traffic takes the right path.</p></div>
+    <div class="card reveal"><div class="ico">&#128222;</div><h3>Voice</h3><p>Dedicated voice VLAN with call control and registered IP phones, separated from data.</p></div>
+  </div>
+</div></section>
+
+<section id="status"><div class="wrap">
+  <div class="eyebrow">Live board (simulated)</div><h2>Service Status</h2><p class="sub">Simulated telemetry for the lab. Values refresh every few seconds.</p>
+  <div class="tablewrap"><table id="stbl"><thead><tr><th>Service</th><th>Address</th><th>Status</th><th>Latency</th><th>Uptime</th></tr></thead><tbody></tbody></table></div>
+</div></section>
+
+<section id="topology"><div class="wrap">
+  <div class="eyebrow">Interactive</div><h2>Network Map</h2><p class="sub">Click any device to see its role and key settings.</p>
+  <div class="topo reveal">
+    <svg viewBox="0 0 760 460" role="img" aria-label="Network topology diagram">
+      <g class="edge"><path d="M380 60 L380 120"/><path d="M380 150 L210 220"/><path d="M380 150 L550 220"/><path d="M230 235 L520 235"/><path d="M200 260 L120 350"/><path d="M200 260 L300 350"/><path d="M560 260 L520 350"/><path d="M560 260 L650 350"/><path d="M200 260 L560 350" opacity=".3"/></g>
+      <g class="flow"><path d="M380 60 L380 120"/><path d="M380 150 L210 220"/><path d="M380 150 L550 220"/></g>
+      <g class="node" data-id="isp"><circle cx="380" cy="40" r="22"/><text x="380" y="44">ISP</text></g>
+      <g class="node" data-id="fw"><rect x="320" y="120" width="120" height="34" rx="8"/><text x="380" y="141">Firewall</text></g>
+      <g class="node" data-id="b1"><rect x="150" y="215" width="120" height="40" rx="8"/><text x="210" y="239">BLD1-CORE</text></g>
+      <g class="node" data-id="b2"><rect x="490" y="215" width="120" height="40" rx="8"/><text x="550" y="239">BLD2-CORE</text></g>
+      <g class="node" data-id="fl1"><rect x="60" y="350" width="120" height="36" rx="8"/><text x="120" y="372">FL1</text></g>
+      <g class="node" data-id="exec"><rect x="240" y="350" width="120" height="36" rx="8"/><text x="300" y="372">EXEC-SW</text></g>
+      <g class="node" data-id="srv"><rect x="460" y="350" width="120" height="36" rx="8"/><text x="520" y="372">Servers</text></g>
+      <g class="node" data-id="wlc"><rect x="610" y="350" width="120" height="36" rx="8"/><text x="670" y="372">WLC + APs</text></g>
+    </svg>
+    <div id="info"><h3>Select a device</h3><ul><li>Hover or tap a node on the map.</li></ul></div>
+  </div>
+</div></section>
+
+<section id="wifi"><div class="wrap">
+  <div class="eyebrow">Wireless</div><h2>Connect to Wi-Fi</h2><p class="sub">Three networks, three levels of trust. Each SSID lands you in its own VLAN.</p>
+  <div class="grid g3">
+    <div class="card ssid reveal"><span class="pill up badge">Staff</span><div class="bars"><i></i><i></i><i></i><i></i></div><h3>ITSupport-Client</h3><p>Standard staff network. Sign in with your ITSupport username and password.</p><dl><dt>Security</dt><dd>WPA2-Enterprise (802.1X)</dd><dt>VLAN</dt><dd>30 &middot; 128.137.232.0/24</dd><dt>Access</dt><dd>Internal services</dd></dl></div>
+    <div class="card ssid reveal"><span class="pill deg badge">Restricted</span><div class="bars"><i></i><i></i><i></i><i></i></div><h3>ITSupport-Executive</h3><p>Leadership network with its own segment and tighter controls.</p><dl><dt>Security</dt><dd>WPA2-Enterprise (802.1X)</dd><dt>VLAN</dt><dd>80 &middot; 128.137.234.32/27</dd><dt>Access</dt><dd>Internal services</dd></dl></div>
+    <div class="card ssid reveal"><span class="pill down badge" style="background:rgba(0,229,255,.14);color:var(--accent)">Visitors</span><div class="bars"><i></i><i></i><i></i><i></i></div><h3>ITSupport-Guest</h3><p>Internet access for visitors. Isolated from internal networks. Ask the front desk for the passphrase.</p><dl><dt>Security</dt><dd>WPA2-Personal (PSK)</dd><dt>VLAN</dt><dd>100 &middot; 128.137.234.96/27</dd><dt>Access</dt><dd>Internet and DNS only</dd></dl></div>
+  </div>
+</div></section>
+
+<section id="directory"><div class="wrap">
+  <div class="eyebrow">Reference</div><h2>Network Directory</h2><p class="sub">Segments and servers at a glance.</p>
+  <div class="tablewrap" style="margin-bottom:22px"><table><thead><tr><th>VLAN</th><th>Name</th><th>Subnet</th><th>Gateway (HSRP)</th></tr></thead><tbody>
+    <tr><td>30</td><td>Client</td><td><code>128.137.232.0/24</code></td><td><code>.254</code></td></tr>
+    <tr><td>40</td><td>Voice</td><td><code>128.137.233.0/24</code></td><td><code>.254</code></td></tr>
+    <tr><td>70</td><td>Printer</td><td><code>128.137.234.0/27</code></td><td><code>.30</code></td></tr>
+    <tr><td>80</td><td>Executive</td><td><code>128.137.234.32/27</code></td><td><code>.62</code></td></tr>
+    <tr><td>100</td><td>Guest</td><td><code>128.137.234.96/27</code></td><td><code>.126</code></td></tr>
+    <tr><td>200</td><td>Servers</td><td><code>192.168.1.0/24</code></td><td>Firewall</td></tr>
+    <tr><td>999</td><td>Management</td><td><code>128.137.234.64/27</code></td><td><code>.94</code></td></tr>
+  </tbody></table></div>
+  <div class="grid g4">
+    <div class="card"><h3>DHCP</h3><p><code>192.168.1.2</code></p></div><div class="card"><h3>DNS</h3><p><code>192.168.1.3</code></p></div>
+    <div class="card"><h3>Web</h3><p><code>192.168.1.4</code></p></div><div class="card"><h3>Email</h3><p><code>192.168.1.5</code></p></div>
+    <div class="card"><h3>AAA / RADIUS</h3><p><code>192.168.1.6</code></p></div><div class="card"><h3>NTP</h3><p><code>192.168.1.7</code></p></div>
+    <div class="card"><h3>TFTP</h3><p><code>192.168.1.8</code></p></div><div class="card"><h3>Wireless Controller</h3><p><code>128.137.234.70</code></p></div>
+  </div>
+</div></section>
+
+<section id="ticket"><div class="wrap">
+  <div class="eyebrow">Support</div><h2>Open a Ticket</h2><p class="sub">Tickets are stored in your browser for this demo. Nothing is sent anywhere.</p>
+  <div class="grid" style="grid-template-columns:1.2fr .8fr;gap:22px">
+    <form id="tf">
+      <div class="row"><label>Name<input id="tn" required placeholder="Your name"></label><label>Email<input id="te" type="email" required placeholder="you@itsupport.lab"></label></div>
+      <div class="row"><label>Category<select id="tc"><option>Wi-Fi / Wireless</option><option>Network outage</option><option>VPN / Access</option><option>Email</option><option>Phone / Voice</option><option>Printer</option><option>Other</option></select></label>
+      <label>Priority<select id="tp"><option>Low</option><option selected>Normal</option><option>High</option><option>Critical</option></select></label></div>
+      <label>What is happening?<textarea id="td" required placeholder="Describe the problem, where you are, and what you already tried."></textarea></label>
+      <button class="btn solid" type="submit">Submit ticket</button>
+      <div id="ok" class="tk" style="display:none"></div>
+    </form>
+    <div><h3 style="margin-bottom:10px">Your tickets</h3><div class="queue" id="q"><div class="tk">No tickets yet.</div></div>
+      <p class="sub" style="margin:14px 0 0;font-size:.82rem">Targets: Critical 1 hour &middot; High 4 hours &middot; Normal 1 business day &middot; Low 3 business days.</p></div>
+  </div>
+</div></section>
+
+<section id="kb"><div class="wrap">
+  <div class="eyebrow">Self-service</div><h2>Help Center</h2><p class="sub">Search common questions.</p>
+  <input class="search" id="s" placeholder="Search: wifi, guest, password, vlan...">
+  <div id="faq">
+    <details><summary>I can see the Wi-Fi networks but cannot join one</summary><p>Secured networks need your credentials saved in a profile on the device. Create a profile with the exact SSID name, choose WPA2-Enterprise for Client and Executive (username and password) or WPA2-Personal for Guest (passphrase), then connect from that profile.</p></details>
+    <details><summary>I joined Wi-Fi but got a 169.254.x.x address</summary><p>That means no DHCP lease was received. Reconnect, wait up to 30 seconds, then release and renew your address. If it persists, open a ticket with the SSID and your location.</p></details>
+    <details><summary>Which network should I use?</summary><p>Staff use ITSupport-Client. Leadership uses ITSupport-Executive. Visitors use ITSupport-Guest, which only reaches the internet and DNS.</p></details>
+    <details><summary>Why can guests not reach internal servers?</summary><p>The guest VLAN is isolated by an access list on the gateways. Guests may use DNS and the internet, but internal subnets are blocked by design.</p></details>
+    <details><summary>What is HSRP and why does it matter?</summary><p>Two core switches share one virtual gateway address. If the active switch or its uplink fails, the standby takes over so devices keep the same gateway with no changes.</p></details>
+    <details><summary>Who manages the network?</summary><p>The ITSupport network team. Management traffic lives on its own VLAN (999), separate from user traffic.</p></details>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><a href="admin.html">Staff console</a> &middot; ITSupport &middot; Mock company infrastructure &middot; Built as a network engineering lab. No real systems or credentials are published on this page.</div></footer>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+/* theme */
+try{var t=localStorage.getItem("its-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}
+$("#theme").onclick=function(){var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{localStorage.setItem("its-theme",n)}catch(e){}};
+/* clock */
+function tick(){var d=new Date();$("#clock").textContent=d.toLocaleTimeString()}tick();setInterval(tick,1000);
+/* terminal typing */
+var lines=[["c","itsupport@noc:~$ "],["","show standby brief\n"],["w","Vlan999  Active  128.137.234.94\nVlan100  Active  128.137.234.126\nVlan30   Active  128.137.232.254\n\n"],["c","itsupport@noc:~$ "],["","show wireless summary\n"],["w","WLC 128.137.234.70   APs joined: 2\nITSupport-Client     VLAN 30   802.1X\nITSupport-Executive  VLAN 80   802.1X\nITSupport-Guest      VLAN 100  PSK\n\n"],["c","itsupport@noc:~$ "],["","ping 192.168.1.6\n"],["w","Reply from 192.168.1.6: time<1ms\nAAA server reachable.\n\n"],["c","itsupport@noc:~$ "]];
+var term=$("#term"),li=0,ci=0,out="";
+function type(){ if(li>=lines.length){term.innerHTML=out+'<span class="caret"></span>';return}
+  var l=lines[li],txt=l[1];
+  if(ci<txt.length){ci+=l[0]===""?1:4;var seg=txt.slice(0,ci);term.innerHTML=out+(l[0]?'<span class="'+l[0]+'">':'')+esc(seg)+(l[0]?'</span>':'')+'<span class="caret"></span>';setTimeout(type,l[0]===""?45:12)}
+  else{out+=(l[0]?'<span class="'+l[0]+'">':'')+esc(txt)+(l[0]?'</span>':'');li++;ci=0;setTimeout(type,l[0]===""?400:120)}}
+function esc(s){return s.replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+type();
+/* counters + reveal */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");var b=$("b[data-n]",e.target);if(b&&!b.done){b.done=1;var n=+b.dataset.n,i=0;var iv=setInterval(function(){i++;b.textContent=i;if(i>=n)clearInterval(iv)},120)}io.unobserve(e.target)}})},{threshold:.15});
+$$(".reveal").forEach(function(e){io.observe(e)});
+/* status board */
+var svc=[["Gateway (HSRP VIP)","128.137.234.94"],["DHCP","192.168.1.2"],["DNS","192.168.1.3"],["Web","192.168.1.4"],["Email","192.168.1.5"],["AAA / RADIUS","192.168.1.6"],["NTP","192.168.1.7"],["Wireless Controller","128.137.234.70"]];
+var tb=$("#stbl tbody");
+svc.forEach(function(s){var tr=document.createElement("tr");tr.innerHTML="<td>"+s[0]+"</td><td><code>"+s[1]+"</code></td><td></td><td></td><td></td>";tb.appendChild(tr)});
+function refresh(){ $$("tr",tb).forEach(function(tr){var r=Math.random(),c=tr.children,lat=(Math.random()*4+0.4).toFixed(1);
+  var st=r>.97?["deg","Degraded"]:["up","Operational"]; if(r>.97)lat=(Math.random()*40+30).toFixed(1);
+  c[2].innerHTML='<span class="pill '+st[0]+'">'+st[1]+"</span>";c[3].textContent=lat+" ms";c[4].textContent=(99.9+Math.random()*.099).toFixed(3)+"%"})}
+refresh();setInterval(refresh,4000);
+/* topology */
+var info={
+ isp:["ISP Edge","Upstream internet connection.","Provides outside connectivity","Reached through the firewall OUTSIDE zone"],
+ fw:["Zone Firewall","Zones: INSIDE, SERVERS, OUTSIDE.","OSPF with the core","Allows DNS, DHCP, web, RADIUS and ICMP to the server zone","Interface cost tuned to prefer the correct path"],
+ b1:["BLD1-CORE-SW1","Collapsed core, primary.","HSRP active, priority 105 with preempt","STP root (priority 4096)","Hosts SVIs for every VLAN and the WLC trunk"],
+ b2:["BLD2-CORE-SW1","Collapsed core, secondary.","HSRP standby with preempt","STP secondary root (priority 8192)","Mirrors every SVI for failover"],
+ fl1:["FL1 Access Switch","Floor access layer.","Dual-homed to both cores","Port-channel to EXEC-SW (LACP)","Voice, data, printer and AP ports"],
+ exec:["EXEC-SW","Executive access layer.","Dual-homed to both cores","LACP link to FL1","Hosts an AP uplink and executive devices"],
+ srv:["Server Zone","192.168.1.0/24","DHCP .2, DNS .3, Web .4","Email .5, AAA .6, NTP .7, TFTP .8","Reached only through firewall policy"],
+ wlc:["Wireless Controller + 2 APs","Management 128.137.234.70","Three WLANs mapped to VLANs 30, 80 and 100","APs on management VLAN 999, trunked to carry client VLANs","FlexConnect local switching"]};
+function show(id){var d=info[id],h="<h3>"+d[0]+"</h3><ul>";d.slice(1).forEach(function(x){h+="<li>"+x+"</li>"});$("#info").innerHTML=h+"</ul>";$$(".node").forEach(function(n){n.classList.toggle("sel",n.dataset.id===id)})}
+$$(".node").forEach(function(n){n.addEventListener("click",function(){show(n.dataset.id)});n.addEventListener("mouseenter",function(){show(n.dataset.id)})});
+/* tickets (shared store, read by admin.html) */
+var KEY="its-tickets-v2";
+function readT(){var raw=null;try{raw=localStorage.getItem(KEY)}catch(e){}
+ if(!raw){try{var m=/ITS_TICKETS=(.*)$/.exec(window.name||"");if(m)raw=decodeURIComponent(m[1])}catch(e){}}
+ var l=[];try{l=JSON.parse(raw||"[]")}catch(e){l=[]}return Array.isArray(l)?l:[]}
+function writeT(l){var js=JSON.stringify(l);try{localStorage.setItem(KEY,js)}catch(e){}try{window.name="ITS_TICKETS="+encodeURIComponent(js)}catch(e){}}
+function draw(){var q=$("#q"),tk=readT();if(!tk.length){q.innerHTML='<div class="tk">No tickets yet.</div>';return}
+ q.innerHTML=tk.slice().sort(function(a,b){return (b.ts||0)-(a.ts||0)}).map(function(t){return '<div class="tk"><b>'+esc(t.id)+'</b> &middot; '+esc(t.cat)+' &middot; '+esc(t.pri)+' &middot; '+esc(t.status||"Open")+'<br>'+esc(t.desc).slice(0,110)+'</div>'}).join("")}
+draw();
+$("#tf").addEventListener("submit",function(e){e.preventDefault();
+ var t={id:"ITS-"+Date.now().toString(36).toUpperCase(),ts:Date.now(),name:$("#tn").value,email:$("#te").value,cat:$("#tc").value,pri:$("#tp").value,desc:$("#td").value,status:"Open"};
+ var l=readT();l.push(t);writeT(l);draw();this.reset();
+ var code="";try{code=btoa(unescape(encodeURIComponent(JSON.stringify(t))))}catch(x){}
+ var ok=$("#ok");ok.style.display="block";ok.innerHTML="Ticket <b>"+t.id+"</b> created. Ticket code (give this to staff if asked):<br><code style=\"word-break:break-all\">"+code+"</code>";});
+/* faq search */
+$("#s").addEventListener("input",function(){var v=this.value.toLowerCase();$$("#faq details").forEach(function(d){d.style.display=d.textContent.toLowerCase().indexOf(v)>-1?"":"none"})});
+/* background network */
+var cv=$("#bg"),cx=cv.getContext("2d"),W,H,P=[];
+function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=[];var n=Math.min(70,Math.floor(W*H/22000));for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35})}
+size();addEventListener("resize",size);
+function frame(){cx.clearRect(0,0,W,H);var col=getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()||"#00e5ff";
+ for(var i=0;i<P.length;i++){var a=P[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+  cx.fillStyle=col;cx.globalAlpha=.7;cx.beginPath();cx.arc(a.x,a.y,1.6,0,6.3);cx.fill();
+  for(var j=i+1;j<P.length;j++){var b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<130){cx.globalAlpha=(1-d/130)*.28;cx.strokeStyle=col;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}}
+ requestAnimationFrame(frame)}
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches)frame();
+})();
+</script>
+</body>
+</html>
