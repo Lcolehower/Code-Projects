@@ -1,0 +1,872 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comcast | Connect to What's Next</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #102544;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.demo-banner {
+  background: #eaf4ff;
+  color: #174c83;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+}
+
+header {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #eee;
+}
+
+nav {
+  max-width: 1150px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: #071b38;
+}
+
+.logo span {
+  color: #0878e8;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  color: #0878e8;
+}
+
+.btn {
+  border: none;
+  border-radius: 30px;
+  padding: 12px 23px;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.btn-blue {
+  background: #0878e8;
+  color: white;
+}
+
+.btn-blue:hover {
+  background: #005bbd;
+}
+
+.btn-white {
+  background: white;
+  color: #092344;
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid #9bb5d6;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 25px;
+  background: none;
+  border: none;
+  color: #071b38;
+}
+
+/* Hero section */
+
+.hero {
+  background: linear-gradient(120deg, #06152e, #0b3264, #0878e8);
+  color: white;
+}
+
+.hero-inner {
+  max-width: 1150px;
+  min-height: 510px;
+  margin: auto;
+  padding: 75px 24px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 35px;
+}
+
+.eyebrow {
+  color: #91c8ff;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 5vw, 66px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin: 20px 0;
+}
+
+.hero p {
+  max-width: 500px;
+  color: #d4e5fa;
+  font-size: 17px;
+  margin-bottom: 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.visual {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.orbit {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #8ac7ff55;
+  border-radius: 50%;
+}
+
+.orbit.two {
+  width: 220px;
+  height: 220px;
+}
+
+.orbit.three {
+  width: 145px;
+  height: 145px;
+}
+
+.wifi {
+  width: 125px;
+  height: 125px;
+  border-radius: 30px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, white, #bcdcff);
+  color: #0878e8;
+  font-size: 70px;
+  transform: rotate(-8deg);
+  box-shadow: 0 20px 60px #0005;
+  z-index: 1;
+}
+
+.floating {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: white;
+  color: #071b38;
+  box-shadow: 0 10px 30px #0003;
+}
+
+.floating strong {
+  display: block;
+  font-size: 18px;
+}
+
+.floating small {
+  color: #65748a;
+}
+
+/* Benefits */
+
+.benefits {
+  max-width: 1100px;
+  padding: 30px 24px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.benefit-icon {
+  background: #eaf4ff;
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 24px;
+}
+
+.benefit h3 {
+  font-size: 15px;
+}
+
+.benefit p {
+  font-size: 12px;
+  color: #65748a;
+}
+
+/* Pricing */
+
+.plans {
+  background: #f6f9fd;
+  padding: 75px 24px;
+  text-align: center;
+}
+
+.section-label {
+  color: #0878e8;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.section-title {
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.2;
+  margin: 12px 0;
+  color: #071b38;
+}
+
+.section-description {
+  color: #65748a;
+  max-width: 580px;
+  margin: 0 auto 38px;
+  font-size: 15px;
+}
+
+.plan-grid {
+  max-width: 1050px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  text-align: left;
+}
+
+.plan-card {
+  background: white;
+  padding: 28px 24px;
+  border: 1px solid #e0e8f1;
+  border-radius: 20px;
+  transition: transform .2s;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+}
+
+.plan-card.featured {
+  border: 2px solid #0878e8;
+}
+
+.popular {
+  color: #0765c3;
+  background: #e6f3ff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.plan-card h3 {
+  font-size: 22px;
+  margin: 14px 0 5px;
+}
+
+.plan-subtitle {
+  color: #65748a;
+  font-size: 13px;
+  min-height: 42px;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 25px 0 4px;
+}
+
+.currency {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.amount {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.period {
+  font-size: 12px;
+  color: #65748a;
+}
+
+.price-note {
+  font-size: 11px;
+  color: #65748a;
+  margin-bottom: 22px;
+}
+
+.plan-card .btn {
+  width: 100%;
+  text-align: center;
+}
+
+.plan-features {
+  list-style: none;
+  border-top: 1px solid #edf1f6;
+  margin-top: 22px;
+  padding-top: 15px;
+}
+
+.plan-features li {
+  font-size: 13px;
+  color: #42536a;
+  margin: 12px 0;
+}
+
+.plan-features li::before {
+  content: "✓";
+  color: #0878e8;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Call to action */
+
+.cta {
+  max-width: 1100px;
+  margin: 70px auto;
+  padding: 0 24px;
+}
+
+.cta-inner {
+  background: linear-gradient(120deg, #0878e8, #06458c);
+  color: white;
+  border-radius: 24px;
+  padding: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.cta h2 {
+  font-size: 32px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.cta p {
+  color: #d8eaff;
+  font-size: 14px;
+}
+
+/* Footer */
+
+footer {
+  background: #07172d;
+  color: white;
+  padding: 45px 24px 20px;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 30px;
+  padding-bottom: 35px;
+}
+
+.footer-grid h4 {
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.footer-grid p,
+.footer-grid a {
+  display: block;
+  font-size: 12px;
+  color: #a9b8cc;
+  margin: 10px 0;
+}
+
+.footer-bottom {
+  border-top: 1px solid #26374c;
+  padding-top: 20px;
+  color: #9baabe;
+  font-size: 11px;
+}
+
+/* Notification */
+
+.notice {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 120px);
+  background: #092344;
+  color: white;
+  padding: 15px 22px;
+  border-radius: 12px;
+  z-index: 100;
+  transition: transform .3s;
+  width: max-content;
+  max-width: calc(100% - 30px);
+  text-align: center;
+  font-size: 14px;
+}
+
+.notice.show {
+  transform: translate(-50%, 0);
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+  .nav-links {
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr .7fr;
+  }
+
+  .plan-grid {
+    gap: 12px;
+  }
+
+  .plan-card {
+    padding: 22px 15px;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    padding: 14px 18px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: white;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding: 55px 22px 35px;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+  }
+
+  .visual {
+    min-height: 240px;
+  }
+
+  .orbit {
+    width: 250px;
+    height: 250px;
+  }
+
+  .orbit.two {
+    width: 190px;
+    height: 190px;
+  }
+
+  .orbit.three {
+    width: 130px;
+    height: 130px;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .plans {
+    padding: 55px 18px;
+  }
+
+  .plan-grid {
+    grid-template-columns: 1fr;
+    max-width: 390px;
+  }
+
+  .plan-card {
+    padding: 27px;
+  }
+
+  .cta {
+    margin: 45px auto;
+  }
+
+  .cta-inner {
+    padding: 30px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cta h2 {
+    font-size: 28px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="demo-banner">
+  CONCEPT DEMO · Sample pricing for demonstration purposes only
+</div>
+
+<header>
+  <nav>
+    <a href="#home" class="logo">comcast<span>.</span></a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#internet">Internet</a>
+      <a href="#plans">Plans & Pricing</a>
+      <a href="#benefits">Why Comcast</a>
+      <a href="#support">Support</a>
+    </div>
+
+    <button class="btn btn-blue"
+      onclick="showNotice('Sign-in is not connected in this demo.')">
+      Sign In
+    </button>
+
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">A better connected life</span>
+        <h1>Big ideas start with a better connection.</h1>
+        <p>
+          Stream your favorites, power your workday, and connect
+          everyone at home with fast, reliable internet.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#plans" class="btn btn-blue">
+            Explore Internet Plans →
+          </a>
+          <button class="btn btn-outline"
+            onclick="showNotice('Availability checking is not connected yet.')">
+            Check Availability
+          </button>
+        </div>
+      </div>
+
+      <div class="visual">
+        <div class="orbit"></div>
+        <div class="orbit two"></div>
+        <div class="orbit three"></div>
+        <div class="wifi">⌁</div>
+        <div class="floating">
+          <strong>Stay connected.</strong>
+          <small>Where life happens.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits" id="benefits">
+    <div class="benefit">
+      <div class="benefit-icon">⚡</div>
+      <div>
+        <h3>Speed for every moment</h3>
+        <p>Power your everyday online life.</p>
+      </div>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-icon">⌂</div>
+      <div>
+        <h3>Connected home</h3>
+        <p>Enjoy a connected home experience.</p>
+      </div>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-icon">♡</div>
+      <div>
+        <h3>Support when you need it</h3>
+        <p>Get help with your connection.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans" id="plans">
+    <span class="section-label">Find your connection</span>
+    <h2 class="section-title">Internet that fits your life.</h2>
+    <p class="section-description">
+      Whether you're browsing, gaming, or streaming across devices,
+      discover a plan designed around your household.
+    </p>
+
+    <div class="plan-grid">
+      <article class="plan-card">
+        <h3>Connect</h3>
+        <p class="plan-subtitle">
+          Everyday browsing, email, and staying in touch.
+        </p>
+        <div class="price">
+          <span class="currency">$</span>
+          <span class="amount">30</span>
+          <span class="period">/month</span>
+        </div>
+        <p class="price-note">Sample price. Terms may vary.</p>
+        <button class="btn btn-blue" onclick="selectPlan('Connect')">
+          Choose Connect
+        </button>
+        <ul class="plan-features">
+          <li>Everyday online activities</li>
+          <li>Browse and video call</li>
+          <li>Connect multiple devices</li>
+          <li>Home Wi-Fi experience</li>
+        </ul>
+      </article>
+
+      <article class="plan-card featured">
+        <span class="popular">Popular choice</span>
+        <h3>Stream</h3>
+        <p class="plan-subtitle">
+          More bandwidth for streaming and busy households.
+        </p>
+        <div class="price">
+          <span class="currency">$</span>
+          <span class="amount">50</span>
+          <span class="period">/month</span>
+        </div>
+        <p class="price-note">Sample price. Terms may vary.</p>
+        <button class="btn btn-blue" onclick="selectPlan('Stream')">
+          Choose Stream
+        </button>
+        <ul class="plan-features">
+          <li>HD entertainment streaming</li>
+          <li>Video calls and remote work</li>
+          <li>Multiple connected devices</li>
+          <li>Online gaming and downloads</li>
+        </ul>
+      </article>
+
+      <article class="plan-card">
+        <h3>Gigabit</h3>
+        <p class="plan-subtitle">
+          A high-performance experience for connected homes.
+        </p>
+        <div class="price">
+          <span class="currency">$</span>
+          <span class="amount">80</span>
+          <span class="period">/month</span>
+        </div>
+        <p class="price-note">Sample price. Terms may vary.</p>
+        <button class="btn btn-blue" onclick="selectPlan('Gigabit')">
+          Choose Gigabit
+        </button>
+        <ul class="plan-features">
+          <li>High-bandwidth activities</li>
+          <li>Large downloads and uploads</li>
+          <li>Busy, connected households</li>
+          <li>High-demand entertainment</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta" id="internet">
+    <div class="cta-inner">
+      <div>
+        <h2>Your next connection starts here.</h2>
+        <p>Explore your options and find a plan for your home.</p>
+      </div>
+      <button class="btn btn-white"
+        onclick="showNotice('Thanks for your interest! This is a demo.')">
+        Get Started →
+      </button>
+    </div>
+  </section>
+</main>
+
+<footer id="support">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" class="logo" style="color:white">
+          comcast<span>.</span>
+        </a>
+        <p>
+          Bringing people and possibilities together through
+          technology and connectivity.
+        </p>
+      </div>
+
+      <div>
+        <h4>Explore</h4>
+        <a href="#internet">Internet</a>
+        <a href="#plans">Plans & Pricing</a>
+        <a href="#benefits">Our Benefits</a>
+      </div>
+
+      <div>
+        <h4>Customer Care</h4>
+        <a href="#support"
+          onclick="showNotice('Contact support is a demo feature.')">
+          Contact Us
+        </a>
+        <a href="#support"
+          onclick="showNotice('Help center is a demo feature.')">
+          Help Center
+        </a>
+        <a href="#support"
+          onclick="showNotice('Account management is not connected.')">
+          My Account
+        </a>
+      </div>
+
+      <div>
+        <h4>Company</h4>
+        <a href="#support">About Us</a>
+        <a href="#support">Careers</a>
+        <a href="#support">Privacy</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Comcast Demo. Unofficial concept website.
+    </div>
+  </div>
+</footer>
+
+<div class="notice" id="notice" role="status" aria-live="polite"></div>
+
+<script>
+const notice = document.getElementById("notice");
+let noticeTimer;
+
+function showNotice(message) {
+  notice.textContent = message;
+  notice.classList.add("show");
+
+  clearTimeout(noticeTimer);
+
+  noticeTimer = setTimeout(() => {
+    notice.classList.remove("show");
+  }, 3000);
+}
+
+function selectPlan(plan) {
+  showNotice(
+    "You selected the " + plan +
+    " plan. Checkout is not connected in this demo."
+  );
+}
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.textContent = "☰";
+  });
+});
+</script>
+
+</body>
+</html>

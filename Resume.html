@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luke Colehower - Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --scarlet: #a6192e;
+            --scarlet-deep: #7a1020;
+            --gold: #ffb81c;
+            --olive: #2d3526;
+            --olive-light: #3b4631;
+            --charcoal: #1f2326;
+            --khaki: #e8dfc6;
+            --khaki-dim: #bdb496;
+            --display: 'Oswald', 'Arial Narrow', Impact, sans-serif;
+            --body: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+        body {
+            margin: 0;
+            font-family: var(--body);
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--khaki);
+            background: var(--charcoal);
+        }
+        a { color: var(--gold); }
+        a:hover { color: #fff; }
+        a:focus-visible, .nav a:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+        /* Navigation */
+        .nav {
+            position: sticky; top: 0; z-index: 10;
+            display: flex; flex-wrap: wrap; gap: 4px 22px;
+            padding: 14px 6vw;
+            background: var(--charcoal);
+            border-bottom: 3px solid var(--gold);
+        }
+        .nav a {
+            font-family: var(--display); font-weight: 500;
+            letter-spacing: .08em; text-transform: uppercase;
+            font-size: .95rem; color: var(--khaki); text-decoration: none;
+        }
+        .nav a:hover { color: var(--gold); }
+
+        /* Hero */
+        header {
+            background: linear-gradient(160deg, var(--scarlet) 0%, var(--scarlet-deep) 100%);
+            padding: 90px 6vw 70px;
+            border-bottom: 8px solid var(--gold);
+        }
+        header h1 {
+            margin: 0 0 6px;
+            font-family: var(--display); font-weight: 700;
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            line-height: .95; letter-spacing: .02em; text-transform: uppercase;
+            color: #fff;
+        }
+        .tagline {
+            margin: 0 0 28px;
+            font-family: var(--display); font-weight: 500;
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            letter-spacing: .06em; color: var(--gold);
+        }
+        .contact-info { display: flex; flex-wrap: wrap; gap: 10px 28px; color: #fff; }
+        .contact-info p { margin: 0; }
+        .contact-info a { color: #fff; font-weight: 600; }
+        .contact-info a:hover { color: var(--gold); }
+        .contact-info b { color: var(--gold); font-weight: 600; margin-right: 6px; }
+
+        /* Sections */
+        main { max-width: 980px; margin: 0 auto; padding: 0 6vw; }
+        .section { padding: 56px 0 8px; }
+        .section h2 {
+            margin: 0 0 24px; display: inline-block;
+            font-family: var(--display); font-weight: 700;
+            font-size: 2rem; letter-spacing: .06em; text-transform: uppercase;
+            color: #fff;
+            padding-bottom: 6px; border-bottom: 4px solid var(--scarlet);
+        }
+        #summary p { max-width: 70ch; font-size: 1.15rem; margin: 0; }
+
+        .experience-item, .education-item {
+            background: var(--olive);
+            border-left: 6px solid var(--gold);
+            padding: 20px 26px;
+            margin-bottom: 18px;
+        }
+        .experience-item h3, .education-item h3 {
+            margin: 0 0 4px;
+            font-family: var(--display); font-weight: 500;
+            font-size: 1.4rem; letter-spacing: .03em; color: var(--gold);
+        }
+        .experience-item p, .education-item p { margin: 0 0 8px; color: var(--khaki-dim); }
+        .experience-item strong, .education-item strong { color: #fff; }
+        .experience-item ul { margin: 8px 0 0; padding-left: 20px; }
+        .experience-item li { margin-bottom: 6px; max-width: 75ch; }
+        .experience-item li strong { color: var(--gold); }
+
+        /* Certifications */
+        #certifications ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+        #certifications li {
+            background: var(--olive); padding: 14px 20px;
+            border-left: 6px solid var(--scarlet);
+        }
+        #certifications li strong { color: #fff; }
+
+        /* Skills */
+        .skill-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-list li {
+            background: var(--scarlet); color: #fff;
+            font-family: var(--display); letter-spacing: .05em;
+            padding: 6px 16px; border-bottom: 3px solid var(--gold);
+        }
+
+        footer {
+            margin-top: 64px; padding: 26px 6vw; text-align: center;
+            background: var(--scarlet-deep); color: var(--khaki);
+            border-top: 6px solid var(--gold);
+        }
+        footer p { margin: 0; }
+
+        @media (max-width: 700px) {
+            header { padding: 60px 6vw 48px; }
+            .section { padding-top: 40px; }
+            .skill-list li { flex: 1 1 40%; text-align: center; }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+</head>
+<body>
+
+    <nav class="nav" aria-label="Page sections">
+        <a href="#summary">Summary</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+    </nav>
+
+    <header>
+        <h1>Luke Colehower</h1>
+        <p class="tagline">United States Marine Corps Veteran · Network Engineer · Cybersecurity</p>
+        <div class="contact-info">
+            <p><b>Email</b><a href="mailto:lcolehower44@gmail.com">lcolehower44@gmail.com</a></p>
+            <p><b>Phone</b>(856) 462-4148</p>
+            <p><b>LinkedIn</b><a href="https://www.linkedin.com/in/luke-colehower-61934423a/?isSelfProfile=true"> LinkedIn </a></p>
+            <p><b>Location</b>Blackwood, NJ 08012</p>
+        </div>
+    </header>
+
+    <main>
+    <section class="section" id="summary">
+        <h2>Summary</h2>
+        <p>United States Marine Corps Veteran with over two years of experience as a Network Engineer and Data Infrastructure specialist. 
+            Proficient in SQL/NoSQL, Oracle, PHP/HTML, Python, C++, Linux/Unix, PowerShell, Splunk, Swift, R, and Bash. 
+            Strong troubleshooting, leadership, and communication skills, with a proven record of technical excellence and operational success.</p>
+    </section>
+
+    <section class="section" id="experience">
+        <h2>Professional Experience</h2>
+
+        <div class="experience-item">
+            <h3>Network Administrator</h3>
+            <p><strong>United States Marine Corps</strong> | Okinawa, Japan | February 2021 – October 2023</p>
+            <ul>
+                <li>Configured, maintained, and troubleshooted mission-critical Wide Area Networks (WAN) supporting over 200 users across multiple locations.</li>
+                <li>Provided Tier-1 and Tier-2 IT Help Desk support, resolving 30–50 user tickets per week with a 98% issue resolution rate within SLA timeframes.</li>
+                <li>Ensured compliance with DoD cybersecurity protocols by auditing systems for vulnerabilities and implementing STIG-compliant remediation.</li>
+                <li>Collaborated with higher headquarters to optimize base network latency and improve bandwidth management.</li>
+                <li>Received a <strong>Certification of Commendation</strong> for configuring and maintaining three network enclaves during MCRE and CCPT readiness evaluations.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3>General Manager</h3>
+            <p><strong>Arch Telecommunications</strong> | Woodbury, New Jersey | December 2023 – January 2026</p>
+            <ul>
+                <li>Provide hands-on technical assistance to customers, troubleshooting smartphones and tablets on Android and iOS platforms.</li>
+                <li>Configure home internet modems and implement secure wireless protocols for customers.</li>
+                <li>Lead retail operations, ensuring customer satisfaction and maintaining compliance with company policies.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3>Network Administrator</h3>
+            <p><strong>Holt Logistics</strong> | Gloucester City, New Jersey | January 2026 – Present</p>
+            <ul>
+                <li>Configured, maintained, and troubleshooted operational-critical infrastructure across three major terminals </li>
+                <li>Collaborated with vendors designed and engineer infrastructure for multiple projects within the companys move to automation</li>
+                <li>Collaborated with team members redesign internal infrastructure to create a more efficient network </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section" id="education">
+        <h2>Education</h2>
+        <div class="education-item">
+            <h3>Bachelor of Arts in Computing and Informatics (Cybersecurity Concentration)</h3>
+            <p><strong>Rowan University</strong> | Glassboro, NJ | August 2025 | GPA: 3.9</p>
+            <p>Dean’s List: Spring 2024, Spring 2025 | President’s List: Fall 2024</p>
+        </div>
+        <div class="education-item">
+            <h3>Master of Science in Cybersecurity</h3>
+            <p><strong>Rowan University</strong> | Glassboro, NJ | December 2026 | GPA: 3.9 </p>
+        </div>
+        <div class="education-item">
+            <h3>Network Administration Training</h3>
+            <p><strong>Marine Corps Communication-Electronics School</strong> | Twentynine Palms, CA | October 2021 – February 2022</p>
+        </div>
+    </section>
+
+    <section class="section" id="certifications">
+        <h2>Certifications &amp; Achievements</h2>
+        <ul>
+            <li><strong>Active DoD Secret Clearance</strong> – Department of War / United States Marine Corps</li>
+            <li><strong>CompTIA Network+</strong> – USMC Certified, June 2022</li>
+            <li><strong>CompTIA Security+</strong> – November 2025 </li>
+            <li><strong>Cisco Certified Network Associate </strong> – January 2026 </li>
+            <li><strong>Certification of Commendation</strong> – 3D SUP BN, 3D MLG, Okinawa, Japan (June 2022)</li>
+        </ul>
+    </section>
+
+    <section class="section" id="skills">
+        <h2>Technical Skills</h2>
+        <ul class="skill-list">
+            <li>SQL / NoSQL</li>
+            <li>Oracle</li>
+            <li>PHP / HTML</li>
+            <li>Python</li>
+            <li>C++</li>
+            <li>Linux / Unix</li>
+            <li>PowerShell</li>
+            <li>Splunk</li>
+            <li>Swift</li>
+            <li>R</li>
+            <li>Javascript</li>
+            <li>Bash</li>
+            <li>IEEE Standards & Cisco proprietary </li>
+            <li>Dynamic Routing (OSPF, EIGRP, BGP)</li>
+            <li>DNS, DHCP, AAA</li>
+            <li>ISP / SD-WAN </li>
+            
+        </ul>
+    </section>
+ <section class="section" id="skills">
+        <h2>Professional Skills</h2>
+        <ul class="skill-list">
+            <li> Servent Leadership </li>
+            <li> Coaching Leadership </li>
+            <li> Transformational Leadership </li>
+            
+            
+        </ul>
+    </section>
+    <section class="section" id="projects">
+        <h2>Projects</h2>
+        <div class="experience-item">
+            <h3>Network + Data Infrastructure</h3>
+            <p>Designed and implemented a secure, multi-router network infrastructure supporting internal servers, user VLANs, and simulated data center communications. 
+                Integrated PHP-based web tools for internal monitoring.</p>
+            <ul>
+                <li>Built a fully functional multi-router network using Cisco IOS and OSPF/EIGRP redistribution.</li>
+                <li>Developed a secure internal web page using PHP, HTML, and MySQL hosted on a Linux server.</li>
+            </ul>
+        </div>
+
+         <div class="experience-item">
+            <h3>Healthy Habits Diet Prep</h3>
+            <p> Collaborated with fellow students to create a meal prep generator based off caloric needs.</p>
+            <ul>
+                <li>Users Can use the application with or without an account</li>
+                <li> Save meals to profile, track weight changes, and maintain profile</li>
+                <a href="http://elvis.rowan.edu/~coleho43/">Healthy Habit Diet Plan</a> 
+            </ul>
+        </div>
+
+         <div class="experience-item">
+            <h3>Packet Trace Labs</h3>
+            <p> Created multiple packet tracer models demonstrating design, engineering, and growth in Network capabilities </p>
+            <ul>
+                <li> Created a Three-tier architecture, followed by a collapse core with a simulated ISP connection</li>
+                <li> Created Proof of Concept Infrastructure to apply what I learned to improve on. </li>
+                <a href="https://github.com/Lcolehower/Network-Infrastructure-Design-Engineering/tree/Collapse-Core">Collapse Core </a> 
+                <a href="https://github.com/Lcolehower/Network-Infrastructure-Design-Engineering/tree/Three-Tier-Architecture">3 Tier</a> 
+                <a href="https://github.com/Lcolehower/Network-Infrastructure-Design-Engineering/tree/Proof-of-Concept-/-Initial-Templets">POC</a> 
+            </ul>
+        </div>
+
+        
+    </section>
+    </main>
+
+    <footer>
+        <p>&copy; Luke Colehower. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
